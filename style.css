@@ -1,0 +1,1246 @@
+/* ==========================================================================
+   EMEK CİĞERCİSİ ET VE SAKATAT - GENEL VE DEĞİŞKEN MİMARİSİ
+   ========================================================================== */
+
+:root {
+  /* Marka & Vurgu Renkleri */
+  --color-main-red: #8C1D18;        /* Logo, Ana Başlıklar & Marka Rengi */
+  --color-accent-red: #C1272D;      /* Canlı Kırmızı - Sadece Butonlar ve Aksiyonlar */
+  --color-accent-red-hover: #A01E23;/* Buton Hover Hali */
+  
+  /* Arka Planlar & Zeminler (%60) */
+  --color-off-white: #F7F5F1;       /* Sayfa Genel Arka Planı */
+  --color-pure-white: #FFFFFF;      /* Ürün Kartları & İç İçerik Zeminleri */
+  
+  /* Nötr & Ayırıcı Tonlar (%30) */
+  --color-light-gray: #E4E1DB;      /* Ayırıcı Çizgiler, Çerçeveler */
+  --color-mid-gray: #6B6863;        /* İkincil Metinler, İpuçları */
+  --color-dark-anthracite: #2E2C2A; /* Header, Footer & Gövde Metni */
+  --color-dark-hover: #1F1D1C;      /* Antrasit Koyu Hover */
+
+  /* Tipografi & Izgara */
+  --font-main: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: 'Outfit', 'Montserrat', sans-serif;
+  
+  /* Tasarım Dili: Köşeli & Sharp (Sıfır Yarıçap) */
+  --border-radius-sharp: 0px;
+  --transition-fast: 0.2s ease-in-out;
+  --transition-normal: 0.3s ease-in-out;
+  
+  /* Düzen Ölçüleri */
+  --container-width: 1200px;
+  --header-height: 85px;
+}
+
+/* Reset & Temel Ayarlar */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border-radius: var(--border-radius-sharp) !important; /* Tüm kenarları kesinlikle köşeli yapar */
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-off-white);
+  color: var(--color-dark-anthracite);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ==========================================================================
+   HEADER VE NAVBAR STİLLERİ
+   ========================================================================== */
+
+.site-header {
+  background-color: var(--color-dark-anthracite);
+  border-bottom: 2px solid var(--color-light-gray);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Logo ve Marka İsmi Alanı */
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+  padding: 5px 0;
+}
+
+.brand-logo {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+}
+
+.brand-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  color: var(--color-pure-white);
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.brand-title span {
+  color: var(--color-accent-red);
+}
+
+.brand-subtitle {
+  color: var(--color-light-gray);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* Navigasyon Menüsü */
+.main-nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-link {
+  color: var(--color-pure-white);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 12px 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  display: block;
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+}
+
+/* Hover & Active Durumu */
+.nav-link:hover {
+  color: var(--color-accent-red);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(228, 225, 219, 0.2);
+}
+
+.nav-link.active {
+  color: var(--color-accent-red);
+  border: 1px solid var(--color-accent-red);
+  background-color: rgba(193, 39, 45, 0.08);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-accent-red);
+}
+
+/* Mobil Menü Butonu (Hamburger) */
+.mobile-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--color-light-gray);
+  color: var(--color-pure-white);
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all var(--transition-fast);
+}
+
+.mobile-toggle:hover {
+  background-color: var(--color-accent-red);
+  border-color: var(--color-accent-red);
+}
+
+/* ==========================================================================
+   BUTON KUTÜPHANESİ (Sadece Canlı Kırmızı #C1272D)
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: none;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--color-accent-red);
+  color: var(--color-pure-white);
+  border: 2px solid var(--color-accent-red);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-accent-red-hover);
+  border-color: var(--color-accent-red-hover);
+  color: var(--color-pure-white);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-dark-anthracite);
+  border: 2px solid var(--color-dark-anthracite);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-dark-anthracite);
+  color: var(--color-pure-white);
+}
+
+/* ==========================================================================
+   SAYFA BAŞLIKLARI VE TASARIM DÜZENİ (GENEL)
+   ========================================================================== */
+
+.page-header {
+  background-color: var(--color-dark-anthracite);
+  color: var(--color-pure-white);
+  padding: 50px 0;
+  border-bottom: 3px solid var(--color-main-red);
+  text-align: center;
+}
+
+.page-title {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-pure-white);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.page-title span {
+  color: var(--color-main-red);
+}
+
+.breadcrumb {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--color-light-gray);
+}
+
+.breadcrumb a {
+  color: var(--color-light-gray);
+}
+
+.breadcrumb a:hover {
+  color: var(--color-accent-red);
+}
+
+.main-content {
+  flex: 1;
+  padding: 60px 0;
+}
+
+/* ==========================================================================
+   FOOTER STİLLERİ (ŞABLON)
+   ========================================================================== */
+
+.site-footer {
+  background-color: var(--color-dark-anthracite);
+  color: var(--color-light-gray);
+  border-top: 3px solid var(--color-main-red);
+  padding-top: 50px;
+  margin-top: auto;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-col h4 {
+  color: var(--color-pure-white);
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--color-main-red);
+  display: inline-block;
+}
+
+.footer-col p {
+  font-size: 0.9rem;
+  color: var(--color-light-gray);
+  line-height: 1.7;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: var(--color-light-gray);
+  font-size: 0.9rem;
+  transition: color var(--transition-fast);
+}
+
+.footer-links a:hover {
+  color: var(--color-accent-red);
+  padding-left: 5px;
+}
+
+.footer-bottom {
+  background-color: #1F1D1C;
+  border-top: 1px solid rgba(228, 225, 219, 0.1);
+  padding: 20px 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-mid-gray);
+}
+
+/* ==========================================================================
+   FOOTER İLETİŞİM ELEMENTLERİ
+   ========================================================================== */
+
+.footer-contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 16px;
+}
+
+.footer-contact-item {
+  flex: 1 1 180px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-contact-item > i {
+  color: var(--color-main-red);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.footer-phone-link,
+.footer-address-link {
+  display: block;
+  color: var(--color-light-gray);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color var(--transition-fast);
+  line-height: 1.5;
+}
+
+.footer-phone-link:hover {
+  color: var(--color-accent-red);
+}
+
+.footer-address-link {
+  color: var(--color-main-red);
+  margin-top: 4px;
+}
+
+.footer-address-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive footer contact */
+@media (max-width: 600px) {
+  .footer-contact-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .footer-contact-item {
+    flex: 1 1 100%;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE DÜZENLEMELER
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .mobile-toggle {
+    display: block;
+  }
+
+  .main-nav {
+    position: absolute;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    background-color: var(--color-dark-anthracite);
+    border-bottom: 3px solid var(--color-main-red);
+    display: none;
+    padding: 20px;
+  }
+
+  .main-nav.active {
+    display: block;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .nav-link {
+    padding: 14px 20px;
+    border: 1px solid var(--color-light-gray);
+  }
+
+  .brand-title {
+    font-size: 1.05rem;
+  }
+
+  .brand-subtitle {
+    font-size: 0.7rem;
+  }
+}
+
+/* ==========================================================================
+   ANA SAYFA - ŞERİT (BÖLÜM) YAPISI
+   ========================================================================== */
+
+.home-strip {
+  padding: 90px 0;
+}
+
+/* -- 1. ŞERİT: HERO (TANITIM) METNİ -- */
+.home-hero {
+  background-color: var(--color-off-white);
+  text-align: center;
+}
+
+.home-hero .hero-kicker {
+  display: inline-block;
+  color: var(--color-main-red);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  border: 2px solid var(--color-main-red);
+  padding: 8px 16px;
+  margin-bottom: 24px;
+}
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.2;
+  color: var(--color-dark-anthracite);
+  text-transform: uppercase;
+  max-width: 820px;
+  margin: 0 auto 24px;
+}
+
+.hero-title span {
+  color: var(--color-main-red);
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--color-mid-gray);
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* -- 2. ŞERİT: AKSİYON BUTONLARI -- */
+.home-actions {
+  background-color: var(--color-pure-white);
+  border-top: 1px solid var(--color-light-gray);
+  border-bottom: 1px solid var(--color-light-gray);
+  text-align: center;
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.action-buttons .btn {
+  min-width: 260px;
+}
+
+/* -- 3. ŞERİT: FOTOĞRAF VİTRİNİ (KAYDIRILABİLİR GALERİ) -- */
+.home-vitrine {
+  background-color: var(--color-off-white);
+}
+
+.vitrine-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.vitrine-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  color: var(--color-dark-anthracite);
+  letter-spacing: 1px;
+}
+
+.vitrine-title span {
+  color: var(--color-main-red);
+}
+
+.vitrine-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 16px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-main-red) var(--color-light-gray);
+}
+
+.vitrine-track::-webkit-scrollbar {
+  height: 8px;
+}
+
+.vitrine-track::-webkit-scrollbar-track {
+  background: var(--color-light-gray);
+}
+
+.vitrine-track::-webkit-scrollbar-thumb {
+  background: var(--color-main-red);
+}
+
+.vitrine-item {
+  flex: 0 0 auto;
+  width: 400px;
+  scroll-snap-align: start;
+}
+
+/* Görsel Yer Tutucu (Resimler netleşince yerine fotoğraf eklenecek) */
+.vitrine-placeholder {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background-color: var(--color-pure-white);
+  border: 2px dashed var(--color-light-gray);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+  padding: 20px;
+}
+
+.vitrine-placeholder i {
+  font-size: 2.6rem;
+  color: var(--color-light-gray);
+}
+
+.vitrine-placeholder .placeholder-text {
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-mid-gray);
+}
+
+.vitrine-placeholder .placeholder-note {
+  font-size: 0.8rem;
+  color: var(--color-mid-gray);
+}
+
+.vitrine-caption {
+  background-color: var(--color-dark-anthracite);
+  color: var(--color-pure-white);
+  padding: 10px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Fotoğraf eklendikten sonra kullanılacak gerçek görsel sınıfı */
+.vitrine-image {
+  aspect-ratio: 4 / 3;
+  background-color: var(--color-pure-white);
+  overflow: hidden;
+}
+
+.vitrine-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  .vitrine-item {
+    width: 85%;
+  }
+
+  .action-buttons .btn {
+    min-width: 100%;
+  }
+}
+
+/* ==========================================================================
+   HAKKIMIZDA SAYFA STİLLERİ
+   ========================================================================== */
+
+.about-strip {
+  padding: 90px 0;
+}
+
+.about-strip-1 {
+  background-color: var(--color-off-white);
+}
+
+.about-strip-2 {
+  background-color: var(--color-pure-white);
+  border-top: 1px solid var(--color-light-gray);
+  border-bottom: 1px solid var(--color-light-gray);
+}
+
+.about-strip-3 {
+  background-color: var(--color-off-white);
+}
+
+/* Ortak Bölüm Başlığı (Ortalanmış) */
+.section-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-dark-anthracite);
+  letter-spacing: 1px;
+  margin-bottom: 44px;
+}
+
+.section-title span {
+  color: var(--color-main-red);
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background-color: var(--color-main-red);
+  margin: 14px auto 0;
+}
+
+/* -- 1. ŞERİT: BİZİ TANIYIN (Fotoğraf Kartı + Sarmalayan Metin) -- */
+.about-wrap {
+  overflow: hidden;
+}
+
+.about-photo-card {
+  float: left;
+  width: 430px;
+  margin: 0 40px 24px 0;
+}
+
+/* Dükkan görseli yer tutucusu (Resim gelince img ile değiştirin) */
+.about-photo-placeholder {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background-color: var(--color-pure-white);
+  border: 2px dashed var(--color-light-gray);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+  padding: 20px;
+}
+
+.about-photo-placeholder i {
+  font-size: 2.6rem;
+  color: var(--color-light-gray);
+}
+
+.about-photo-placeholder .placeholder-text {
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-mid-gray);
+}
+
+.about-photo-placeholder .placeholder-note {
+  font-size: 0.8rem;
+  color: var(--color-mid-gray);
+}
+
+.about-photo-caption {
+  background-color: var(--color-dark-anthracite);
+  color: var(--color-pure-white);
+  padding: 10px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Resim yüklendikten sonra kullanılacak gerçek görsel kabı */
+.about-photo-frame {
+  aspect-ratio: 4 / 3;
+  background-color: var(--color-pure-white);
+  overflow: hidden;
+}
+
+.about-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-text {
+  font-size: 1.02rem;
+  line-height: 1.9;
+  color: var(--color-dark-anthracite);
+  text-align: justify;
+}
+
+.about-text strong {
+  color: var(--color-main-red);
+}
+
+/* -- 2. ŞERİT: MİSYON VE VİZYON -- */
+.mission-block {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.mission-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.mission-col {
+  background-color: var(--color-off-white);
+  border: 2px solid var(--color-light-gray);
+  padding: 36px 30px;
+  position: relative;
+}
+
+.mission-col::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background-color: var(--color-main-red);
+}
+
+.mission-icon {
+  font-size: 1.8rem;
+  color: var(--color-main-red);
+  margin-bottom: 16px;
+}
+
+.mission-col h3 {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-dark-anthracite);
+  margin-bottom: 14px;
+}
+
+.mission-col p {
+  font-size: 0.98rem;
+  line-height: 1.85;
+  color: var(--color-mid-gray);
+  text-align: justify;
+}
+
+/* -- 3. ŞERİT: KALİTE STANDARTLARI -- */
+.quality-text {
+  max-width: 860px;
+  margin: 0 auto;
+  font-size: 1.02rem;
+  line-height: 1.9;
+  color: var(--color-dark-anthracite);
+  text-align: center;
+}
+
+.quality-text strong {
+  color: var(--color-main-red);
+}
+
+/* Sertifika Vitrini (Hover'da hafif büyüme) */
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.cert-card {
+  background-color: var(--color-pure-white);
+  border: 2px solid var(--color-light-gray);
+  padding: 10px;
+  text-align: center;
+  transition: transform var(--transition-normal), border-color var(--transition-normal);
+}
+
+.cert-card:hover {
+  transform: scale(1.04);
+  border-color: var(--color-main-red);
+}
+
+.cert-icon {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-off-white);
+  border: 2px solid var(--color-light-gray);
+  font-size: 1.7rem;
+  color: var(--color-main-red);
+}
+
+/* Sertifika görseli */
+.cert-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-light-gray);
+  background-color: var(--color-pure-white);
+}
+
+@media (max-width: 900px) {
+  .certs-grid {
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 16px;
+  }
+
+  .about-photo-card {
+    float: none;
+    width: 100%;
+    margin: 0 0 24px 0;
+  }
+
+  .mission-item {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* ==========================================================================
+   ÜRÜNLERİMİZ SAYFA STİLLERİ
+   ========================================================================== */
+
+.products-strip {
+  padding: 90px 0;
+}
+
+.products-strip-1 {
+  background-color: var(--color-off-white);
+}
+
+.products-strip-2 {
+  background-color: var(--color-pure-white);
+  border-top: 1px solid var(--color-light-gray);
+  border-bottom: 1px solid var(--color-light-gray);
+}
+
+/* -- 1. ŞERİT: BÖLÜM BAŞLIĞI -- */
+.products-head {
+  text-align: center;
+}
+
+.products-kicker {
+  display: inline-block;
+  color: var(--color-main-red);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  border: 2px solid var(--color-main-red);
+  padding: 8px 16px;
+  margin-bottom: 20px;
+}
+
+.products-title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  text-transform: uppercase;
+  color: var(--color-dark-anthracite);
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.products-title span {
+  color: var(--color-main-red);
+}
+
+.products-tagline {
+  font-size: 1.05rem;
+  color: var(--color-mid-gray);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* -- 2. ŞERİT: FİLTRE BUTONLARI VE ÜRÜN VİTRİNİ -- */
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.filter-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--color-pure-white);
+  border: 2px solid var(--color-dark-anthracite);
+  color: var(--color-dark-anthracite);
+  padding: 15px 34px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filter-btn:hover {
+  border-color: var(--color-main-red);
+  color: var(--color-main-red);
+}
+
+.filter-btn.active {
+  background-color: var(--color-accent-red);
+  border-color: var(--color-accent-red);
+  color: var(--color-pure-white);
+}
+
+.filter-btn.active:hover {
+  color: var(--color-pure-white);
+}
+
+/* Alt Filtre (Dana / Kuzu) - Çiğ Ürünler aktifken görünür */
+.filter-sub {
+  display: none;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.filter-sub.visible {
+  display: flex;
+}
+
+.filter-sub .filter-btn {
+  padding: 10px 24px;
+  font-size: 0.85rem;
+  border-color: var(--color-light-gray);
+  color: var(--color-dark-anthracite);
+}
+
+.filter-sub .filter-btn.active {
+  background-color: var(--color-main-red);
+  border-color: var(--color-main-red);
+  color: var(--color-pure-white);
+}
+
+/* Ürün Vitrini */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+  margin-top: 28px;
+}
+
+.product-card {
+  background-color: var(--color-pure-white);
+  border: 2px solid var(--color-light-gray);
+  transition: transform var(--transition-normal), border-color var(--transition-normal);
+}
+
+.product-card:hover {
+  transform: scale(1.04);
+  border-color: var(--color-main-red);
+}
+
+.product-image {
+  aspect-ratio: 4 / 3;
+  background-color: var(--color-pure-white);
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Ürün görseli yer tutucusu (Resim gelince img ile değiştirin) */
+.product-placeholder {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background-color: var(--color-pure-white);
+  border: 2px dashed var(--color-light-gray);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.product-placeholder i {
+  font-size: 2.2rem;
+  color: var(--color-light-gray);
+}
+
+.product-placeholder .placeholder-text {
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-mid-gray);
+}
+
+.product-placeholder .placeholder-note {
+  font-size: 0.75rem;
+  color: var(--color-mid-gray);
+}
+
+.product-name {
+  text-align: center;
+  padding: 14px 16px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-dark-anthracite);
+  border-top: 3px solid var(--color-main-red);
+}
+
+@media (max-width: 900px) {
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-btn {
+    width: 100%;
+  }
+
+  .filter-sub {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+  }
+}
+
+/* ==========================================================================
+   İLETİŞİM SAYFA STİLLERİ
+   ========================================================================== */
+
+.contact-strip {
+  padding: 90px 0;
+}
+
+.contact-strip-1 {
+  background-color: var(--color-off-white);
+}
+
+.contact-strip-2 {
+  background-color: var(--color-pure-white);
+  border-top: 1px solid var(--color-light-gray);
+  border-bottom: 1px solid var(--color-light-gray);
+}
+
+.contact-strip-3 {
+  background-color: var(--color-off-white);
+}
+
+/* -- 1. ŞERİT: BÖLÜM BAŞLIĞI -- */
+.contact-head {
+  text-align: center;
+}
+
+/* -- 2. ŞERİT: TELEFON VE ADRES KARTLARI -- */
+.contact-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+
+.contact-card {
+  flex: 1 1 320px;
+  max-width: 460px;
+  background-color: var(--color-pure-white);
+  border: 2px solid var(--color-light-gray);
+  padding: 36px 30px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  transition: border-color var(--transition-normal);
+}
+
+.contact-card:hover {
+  border-color: var(--color-main-red);
+}
+
+.contact-icon {
+  flex-shrink: 0;
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-main-red);
+  color: var(--color-pure-white);
+  font-size: 1.4rem;
+}
+
+.contact-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-dark-anthracite);
+  margin-bottom: 10px;
+}
+
+/* Bilgi henüz girilmediğinde görünecek yer tutucu */
+.contact-value {
+  font-size: 1rem;
+  color: var(--color-dark-anthracite);
+  font-weight: 600;
+}
+
+.contact-value.placeholder {
+  color: var(--color-mid-gray);
+  font-weight: 400;
+  font-style: italic;
+  border: 1px dashed var(--color-light-gray);
+  padding: 8px 12px;
+  display: inline-block;
+  background-color: var(--color-off-white);
+}
+
+.contact-note {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--color-mid-gray);
+}
+
+/* -- 3. ŞERİT: GOOGLE MAPS -- */
+.map-head {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.map-wrap {
+  border: 3px solid var(--color-dark-anthracite);
+  background-color: var(--color-pure-white);
+  overflow: hidden;
+}
+
+.map-wrap iframe {
+  display: block;
+  width: 100%;
+  height: 480px;
+  border: 0;
+  filter: grayscale(30%);
+}
+
+@media (max-width: 900px) {
+  .contact-card {
+    flex: 1 1 100%;
+    max-width: none;
+  }
+
+  .map-wrap iframe {
+    height: 320px;
+  }
+}
